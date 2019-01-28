@@ -1,0 +1,28 @@
+/* This is the second assignment 
+We are writing some introductory queries using the database named: AdventureWorksDW2012.
+*/
+
+SELECT TOP 10 FirstName, LastName --1. Show top 10 employee first and last names, that have last names starting with a, j, or p
+FROM Employee
+WHERE LastName LIKE '[AJP]%';
+
+SELECT FirstName, LastName, BaseRate, Title --2. Show employee first and last name, pay base rate, and job title that is not manager, base rate being greater than or equal to $45, ordered by last name in descending order 
+FROM Employee
+WHERE BaseRate>=45 AND Title<>'Manager'
+ORDER BY LastName DESC;
+
+SELECT (FirstName)+ ' - ' +(LastName)+ ' (' +(Title)+ ') ' +(DepartmentName) AS employee_info --3. Make a calculated field called employee_info, showing employee first and last name, title, and department 
+FROM Employee;
+
+SELECT (FirstName)+'('+(LastName)+')'+'('+(Title)+')'+'('+(DepartmentName)+')' AS employee_info --3a. Same approach as query 3., but with no formatting changes completed around spaces, parentheses and hyphens within calculated field (same way as taught in class)
+FROM Employee;
+
+SELECT FirstName, LastName, Title, (SickLeaveHours+VacationHours)*(BaseRate) AS costForSickandVacation --4. Show first and last name of employees, with their title with  sick and vacation hours expressed in their base rate pay, from only job titles that start with s
+FROM Employee
+WHERE Title LIKE '[S]%';
+
+SELECT FirstName, LastName, Gender, Title --5. Show first and last name, gender, and title, of employees that have titles that begin with p that are not managers; order results by vacation hours in descending order
+FROM Employee
+WHERE Title LIKE '[P]%' AND Title<>'Manager'
+ORDER BY VacationHours DESC;
+
